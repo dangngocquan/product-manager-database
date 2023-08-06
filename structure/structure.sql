@@ -384,6 +384,7 @@ DROP TABLE IF EXISTS `brands`;
 CREATE TABLE `brands` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
+  `image_url` text,
   PRIMARY KEY (`id`)
 ) 
 
