@@ -2,3 +2,5 @@
 
 2. cities.sql
 
+3. categories.sql
+
