@@ -1,14 +1,4 @@
 --
--- Table structure for table `brands`
---
-
-CREATE TABLE `brands` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-)
-
---
 -- Table structure for table `carts`
 --
 
@@ -100,20 +90,20 @@ CREATE TABLE `feedback_images` (
 ) 
 
 --
--- Table structure for table `follow_shops`
+-- Table structure for table `follow_brands`
 --
 
-DROP TABLE IF EXISTS `follow_shops`;
-CREATE TABLE `follow_shops` (
+DROP TABLE IF EXISTS `follow_brands`;
+CREATE TABLE `follow_brands` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `shop_id` int NOT NULL,
+  `brand_id` int NOT NULL,
   `user_id` int NOT NULL,
   `started_time` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_followShops_connect_shops` (`shop_id`),
-  KEY `fk_followShops_connect_users` (`user_id`),
-  CONSTRAINT `follow_shops_ibfk_1` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`),
-  CONSTRAINT `follow_shops_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+  KEY `fk_followBrands_connect_brands` (`brand_id`),
+  KEY `fk_followBrands_connect_users` (`user_id`),
+  CONSTRAINT `follow_brands_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`),
+  CONSTRAINT `follow_brands_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) 
 
 --
@@ -342,17 +332,14 @@ CREATE TABLE `products` (
   `name` varchar(255) NOT NULL,
   `image_url` text NOT NULL,
   `price` int NOT NULL,
-  `shop_id` int NOT NULL,
   `brand_id` int NOT NULL,
   `origin_country_id` int NOT NULL,
   `description` text,
   `is_enable` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_products_connect_shops` (`shop_id`),
   KEY `fk_products_connect_brands` (`brand_id`),
   KEY `fk_products_connect_countries` (`origin_country_id`),
-  CONSTRAINT `products_ibfk_1` FOREIGN KEY (`shop_id`) REFERENCES `shops` (`id`),
-  CONSTRAINT `products_ibfk_2` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`),
+  CONSTRAINT `products_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`),
   CONSTRAINT `products_ibfk_4` FOREIGN KEY (`origin_country_id`) REFERENCES `countries` (`id`)
 ) 
 
@@ -390,23 +377,16 @@ CREATE TABLE `search_histories` (
 )
 
 --
--- Table structure for table `shops`
+-- Table structure for table `brands`
 --
 
-DROP TABLE IF EXISTS `shops`;
-CREATE TABLE `shops` (
+DROP TABLE IF EXISTS `brands`;
+CREATE TABLE `brands` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `country_id` int NOT NULL,
-  `city_id` int NOT NULL,
-  `address_details` text,
   `phone_number` varchar(255) NOT NULL,
   `email` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_shops_connect_countries` (`country_id`),
-  KEY `fk_shops_connect_cities` (`city_id`),
-  CONSTRAINT `shops_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`),
-  CONSTRAINT `shops_ibfk_2` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`)
+  PRIMARY KEY (`id`)
 ) 
 
 --
