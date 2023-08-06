@@ -202,23 +202,6 @@ CREATE TABLE `payment_methods` (
 ) 
 
 --
--- Table structure for table `product_colors`
---
-
-DROP TABLE IF EXISTS `product_colors`;
-CREATE TABLE `product_colors` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `product_id` int NOT NULL,
-  `color_name` varchar(255) NOT NULL,
-  `image_url` text,
-  `is_enable` int NOT NULL,
-  `is_sold_out` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_productColors_connect_products` (`product_id`),
-  CONSTRAINT `product_colors_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) 
-
---
 -- Table structure for table `product_feedbacks`
 --
 
@@ -288,39 +271,7 @@ CREATE TABLE `product_of_categories` (
   CONSTRAINT `product_of_categories_ibfk_2` FOREIGN KEY (`sub_category_id`) REFERENCES `sub_categories` (`id`)
 ) 
 
---
--- Table structure for table `product_prices`
---
 
-DROP TABLE IF EXISTS `product_prices`;
-CREATE TABLE `product_prices` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `product_size_id` int NOT NULL,
-  `product_color_id` int NOT NULL,
-  `price` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_productPrices_connect_productSizes` (`product_size_id`),
-  KEY `fk_productPrices_connect_productColors` (`product_color_id`),
-  CONSTRAINT `product_prices_ibfk_1` FOREIGN KEY (`product_size_id`) REFERENCES `product_sizes` (`id`),
-  CONSTRAINT `product_prices_ibfk_2` FOREIGN KEY (`product_color_id`) REFERENCES `product_colors` (`id`)
-) 
-
---
--- Table structure for table `product_sizes`
---
-
-DROP TABLE IF EXISTS `product_sizes`;
-CREATE TABLE `product_sizes` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `product_id` int NOT NULL,
-  `size_name` varchar(255) NOT NULL,
-  `image_url` text,
-  `is_enable` int NOT NULL,
-  `is_sold_out` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_productSizes_connect_products` (`product_id`),
-  CONSTRAINT `product_sizes_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) 
 
 --
 -- Table structure for table `products`
