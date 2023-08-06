@@ -1,6 +1,5 @@
 1. countries.sql
-
 2. cities.sql
-
 3. categories.sql
+4. sub_categories.sql
 
