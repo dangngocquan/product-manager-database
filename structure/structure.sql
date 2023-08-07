@@ -9,7 +9,7 @@ CREATE TABLE `brand_followers` (
   `id` int NOT NULL AUTO_INCREMENT,
   `brand_id` int NOT NULL,
   `follower_id` int NOT NULL,
-  `time_followed` datetime NOT NULL,
+  `time_followed` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `pk_brandFollowers_connect_brands` (`brand_id`),
   KEY `pk_brandFollowers_connect_users` (`follower_id`),
@@ -28,7 +28,7 @@ CREATE TABLE `brands` (
   `name` varchar(255) NOT NULL,
   `short_name` varchar(255) NOT NULL,
   `image_url` text,
-  `joined_time` datetime NOT NULL,
+  `joined_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 );
 
@@ -89,7 +89,7 @@ CREATE TABLE `delivers` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `phone_number` varchar(255) NOT NULL,
-  `is_enable` int NOT NULL,
+  `is_enable` int NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
 );
 
@@ -131,7 +131,7 @@ DROP TABLE IF EXISTS `login_histories`;
 CREATE TABLE `login_histories` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
-  `time_login` datetime NOT NULL,
+  `time_login` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `fk_loginHistories_connect_users` (`user_id`),
   CONSTRAINT `login_histories_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
@@ -149,6 +149,7 @@ CREATE TABLE `notifications` (
   `title` text NOT NULL,
   `description` text,
   `is_seen` int NOT NULL,
+  `time_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `pk_notifications_connect_users` (`user_id`),
   KEY `pk_notifications_connect_products` (`product_id`),
@@ -182,7 +183,7 @@ CREATE TABLE `orders` (
   `address` text NOT NULL,
   `deliver_id` int NOT NULL,
   `payment_method_id` int NOT NULL,
-  `time_order_placed` datetime DEFAULT NULL,
+  `time_order_placed` datetime DEFAULT CURRENT_TIMESTAMP,
   `time_order_confirmed` datetime DEFAULT NULL,
   `time_order_shipped_out` datetime DEFAULT NULL,
   `time_order_received` datetime DEFAULT NULL,
@@ -241,7 +242,7 @@ CREATE TABLE `product_feedbacks` (
   `user_id` int NOT NULL,
   `number_star` int NOT NULL,
   `comment` text NOT NULL,
-  `time_created` datetime NOT NULL,
+  `time_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `fk_productFeedbacks_connect_products` (`product_id`),
   KEY `fk_productFeedbacks_connect_users` (`user_id`),
@@ -313,7 +314,7 @@ CREATE TABLE `products` (
   `brand_id` int NOT NULL,
   `origin_country_id` int NOT NULL,
   `description` text,
-  `is_enable` int NOT NULL,
+  `is_enable` int NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `fk_products_connect_shops` (`brand_id`),
   KEY `fk_products_connect_countries` (`origin_country_id`),
@@ -333,7 +334,7 @@ CREATE TABLE `receivers` (
   `phone_number` varchar(255) NOT NULL,
   `address` text NOT NULL,
   `is_default_receiver` int NOT NULL,
-  `is_enable` int NOT NULL,
+  `is_enable` int NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `pk_receivers_connect_users` (`user_id`),
   CONSTRAINT `receivers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
@@ -348,7 +349,7 @@ CREATE TABLE `search_histories` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `content` text NOT NULL,
-  `time_searched` datetime NOT NULL,
+  `time_searched` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `fk_searchHistories_connect_users` (`user_id`),
   CONSTRAINT `search_histories_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
@@ -377,7 +378,7 @@ CREATE TABLE `user_followers` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` int NOT NULL,
   `follower_id` int NOT NULL,
-  `time_followed` datetime NOT NULL,
+  `time_followed` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `pk_userFollowers_connect_users` (`user_id`),
   KEY `pk_userFollowers_connect_users2` (`follower_id`),
@@ -394,7 +395,7 @@ CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `account_created_time` datetime NOT NULL,
+  `account_created_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   `gender` varchar(255) NOT NULL,
@@ -403,7 +404,7 @@ CREATE TABLE `users` (
   `country_id` int NOT NULL,
   `city_id` int NOT NULL,
   `address_details` text,
-  `is_enable` int NOT NULL,
+  `is_enable` int NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
   KEY `fk_users_connect_countries` (`country_id`),
   KEY `fk_users_connect_cities` (`city_id`),
