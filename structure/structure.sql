@@ -1,3 +1,37 @@
+
+
+--
+-- Table structure for table `brand_followers`
+--
+
+DROP TABLE IF EXISTS `brand_followers`;
+CREATE TABLE `brand_followers` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `brand_id` int NOT NULL,
+  `follower_id` int NOT NULL,
+  `time_followed` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pk_brandFollowers_connect_brands` (`brand_id`),
+  KEY `pk_brandFollowers_connect_users` (`follower_id`),
+  CONSTRAINT `brand_followers_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`),
+  CONSTRAINT `brand_followers_ibfk_2` FOREIGN KEY (`follower_id`) REFERENCES `users` (`id`)
+);
+
+--
+-- Table structure for table `brands`
+--
+
+DROP TABLE IF EXISTS `brands`;
+CREATE TABLE `brands` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `owner_id` int NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `short_name` varchar(255) NOT NULL,
+  `image_url` text,
+  `joined_time` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
 --
 -- Table structure for table `carts`
 --
@@ -8,7 +42,7 @@ CREATE TABLE `carts` (
   `user_id` int NOT NULL,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-)
+);
 
 --
 -- Table structure for table `categories`
@@ -19,7 +53,7 @@ CREATE TABLE `categories` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-)
+);
 
 --
 -- Table structure for table `cities`
@@ -33,7 +67,7 @@ CREATE TABLE `cities` (
   PRIMARY KEY (`id`),
   KEY `fk_cities_connect_countries` (`country_id`),
   CONSTRAINT `cities_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`)
-) 
+);
 
 --
 -- Table structure for table `countries`
@@ -44,7 +78,7 @@ CREATE TABLE `countries` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) 
+);
 
 --
 -- Table structure for table `delivers`
@@ -57,7 +91,7 @@ CREATE TABLE `delivers` (
   `phone_number` varchar(255) NOT NULL,
   `is_enable` int NOT NULL,
   PRIMARY KEY (`id`)
-) 
+);
 
 --
 -- Table structure for table `favourite_products`
@@ -73,7 +107,7 @@ CREATE TABLE `favourite_products` (
   KEY `fk_favouriteProducts_connect_users` (`user_id`),
   CONSTRAINT `favourite_products_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   CONSTRAINT `favourite_products_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) 
+);
 
 --
 -- Table structure for table `feedback_images`
@@ -87,24 +121,7 @@ CREATE TABLE `feedback_images` (
   PRIMARY KEY (`id`),
   KEY `fk_feedbackImages_connect_productFeedbacks` (`product_feedback_id`),
   CONSTRAINT `feedback_images_ibfk_1` FOREIGN KEY (`product_feedback_id`) REFERENCES `product_feedbacks` (`id`)
-) 
-
---
--- Table structure for table `follow_brands`
---
-
-DROP TABLE IF EXISTS `follow_brands`;
-CREATE TABLE `follow_brands` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `brand_id` int NOT NULL,
-  `user_id` int NOT NULL,
-  `started_time` datetime NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_followBrands_connect_brands` (`brand_id`),
-  KEY `fk_followBrands_connect_users` (`user_id`),
-  CONSTRAINT `follow_brands_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`),
-  CONSTRAINT `follow_brands_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) 
+);
 
 --
 -- Table structure for table `login_histories`
@@ -118,7 +135,7 @@ CREATE TABLE `login_histories` (
   PRIMARY KEY (`id`),
   KEY `fk_loginHistories_connect_users` (`user_id`),
   CONSTRAINT `login_histories_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) 
+);
 
 --
 -- Table structure for table `notifications`
@@ -137,7 +154,7 @@ CREATE TABLE `notifications` (
   KEY `pk_notifications_connect_products` (`product_id`),
   CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
   CONSTRAINT `notifications_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) 
+);
 
 --
 -- Table structure for table `order_status`
@@ -148,7 +165,7 @@ CREATE TABLE `order_status` (
   `id` int NOT NULL AUTO_INCREMENT,
   `description` text,
   PRIMARY KEY (`id`)
-)
+);
 
 --
 -- Table structure for table `orders`
@@ -159,8 +176,7 @@ CREATE TABLE `orders` (
   `id` int NOT NULL AUTO_INCREMENT,
   `receiver_id` int NOT NULL,
   `product_id` int NOT NULL,
-  `product_size_id` int NOT NULL,
-  `product_color_id` int NOT NULL,
+  `product_attributes_info` text,
   `quantity` int NOT NULL,
   `total_price` int NOT NULL,
   `address` text NOT NULL,
@@ -177,8 +193,6 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`id`),
   KEY `fk_orders_connect_receivers` (`receiver_id`),
   KEY `fk_orders_connect_products` (`product_id`),
-  KEY `fk_orders_connect_productSizes` (`product_size_id`),
-  KEY `fk_orders_connect_productColors` (`product_color_id`),
   KEY `fk_orders_connect_delivers` (`deliver_id`),
   KEY `fk_orders_connect_paymentMethods` (`payment_method_id`),
   KEY `fk_orders_connect_orderStatus` (`order_status_id`),
@@ -187,7 +201,7 @@ CREATE TABLE `orders` (
   CONSTRAINT `orders_ibfk_5` FOREIGN KEY (`deliver_id`) REFERENCES `delivers` (`id`),
   CONSTRAINT `orders_ibfk_6` FOREIGN KEY (`payment_method_id`) REFERENCES `payment_methods` (`id`),
   CONSTRAINT `orders_ibfk_7` FOREIGN KEY (`order_status_id`) REFERENCES `order_status` (`id`)
-)
+);
 
 --
 -- Table structure for table `payment_methods`
@@ -199,7 +213,22 @@ CREATE TABLE `payment_methods` (
   `method_name` varchar(255) NOT NULL,
   `description` text,
   PRIMARY KEY (`id`)
-) 
+);
+
+--
+-- Table structure for table `product_attributes_and_prices`
+--
+
+DROP TABLE IF EXISTS `product_attributes_and_prices`;
+CREATE TABLE `product_attributes_and_prices` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `product_id` int NOT NULL,
+  `attributes` json DEFAULT NULL,
+  `price` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_productAttributesAndPrices_connect_products` (`product_id`),
+  CONSTRAINT `product_attributes_and_prices_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
+);
 
 --
 -- Table structure for table `product_feedbacks`
@@ -218,7 +247,7 @@ CREATE TABLE `product_feedbacks` (
   KEY `fk_productFeedbacks_connect_users` (`user_id`),
   CONSTRAINT `product_feedbacks_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   CONSTRAINT `product_feedbacks_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-)
+);
 
 --
 -- Table structure for table `product_images`
@@ -232,7 +261,7 @@ CREATE TABLE `product_images` (
   PRIMARY KEY (`id`),
   KEY `fk_productImages_connect_products` (`product_id`),
   CONSTRAINT `product_images_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) 
+);
 
 --
 -- Table structure for table `product_in_carts`
@@ -253,7 +282,7 @@ CREATE TABLE `product_in_carts` (
   KEY `fk_productInCarts_connect_productColors` (`product_color_id`),
   CONSTRAINT `product_in_carts_ibfk_1` FOREIGN KEY (`cart_id`) REFERENCES `carts` (`id`),
   CONSTRAINT `product_in_carts_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`)
-) 
+);
 
 --
 -- Table structure for table `product_of_categories`
@@ -269,9 +298,7 @@ CREATE TABLE `product_of_categories` (
   KEY `fk_productOfCategories_connect_subCategories` (`sub_category_id`),
   CONSTRAINT `product_of_categories_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
   CONSTRAINT `product_of_categories_ibfk_2` FOREIGN KEY (`sub_category_id`) REFERENCES `sub_categories` (`id`)
-) 
-
-
+);
 
 --
 -- Table structure for table `products`
@@ -288,11 +315,11 @@ CREATE TABLE `products` (
   `description` text,
   `is_enable` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_products_connect_brands` (`brand_id`),
+  KEY `fk_products_connect_shops` (`brand_id`),
   KEY `fk_products_connect_countries` (`origin_country_id`),
   CONSTRAINT `products_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brands` (`id`),
   CONSTRAINT `products_ibfk_4` FOREIGN KEY (`origin_country_id`) REFERENCES `countries` (`id`)
-) 
+);
 
 --
 -- Table structure for table `receivers`
@@ -310,7 +337,7 @@ CREATE TABLE `receivers` (
   PRIMARY KEY (`id`),
   KEY `pk_receivers_connect_users` (`user_id`),
   CONSTRAINT `receivers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-)
+);
 
 --
 -- Table structure for table `search_histories`
@@ -325,20 +352,7 @@ CREATE TABLE `search_histories` (
   PRIMARY KEY (`id`),
   KEY `fk_searchHistories_connect_users` (`user_id`),
   CONSTRAINT `search_histories_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-)
-
---
--- Table structure for table `brands`
---
-
-DROP TABLE IF EXISTS `brands`;
-CREATE TABLE `brands` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `short_name` varchar(255) NOT NULL,
-  `image_url` text,
-  PRIMARY KEY (`id`)
-) 
+);
 
 --
 -- Table structure for table `sub_categories`
@@ -352,7 +366,24 @@ CREATE TABLE `sub_categories` (
   PRIMARY KEY (`id`),
   KEY `fk_subCategories_connect_categories` (`parent_category_id`),
   CONSTRAINT `sub_categories_ibfk_1` FOREIGN KEY (`parent_category_id`) REFERENCES `categories` (`id`)
-)
+);
+
+--
+-- Table structure for table `user_followers`
+--
+
+DROP TABLE IF EXISTS `user_followers`;
+CREATE TABLE `user_followers` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `follower_id` int NOT NULL,
+  `time_followed` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pk_userFollowers_connect_users` (`user_id`),
+  KEY `pk_userFollowers_connect_users2` (`follower_id`),
+  CONSTRAINT `user_followers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `user_followers_ibfk_2` FOREIGN KEY (`follower_id`) REFERENCES `users` (`id`)
+);
 
 --
 -- Table structure for table `users`
@@ -378,6 +409,6 @@ CREATE TABLE `users` (
   KEY `fk_users_connect_cities` (`city_id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `countries` (`id`),
   CONSTRAINT `users_ibfk_2` FOREIGN KEY (`city_id`) REFERENCES `cities` (`id`)
-)
+);
 
--- Dump completed on 2023-08-06 20:31:06
+-- Dump completed on 2023-08-07 13:45:56
