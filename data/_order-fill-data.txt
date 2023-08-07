@@ -2,4 +2,5 @@
 2. cities.sql
 3. categories.sql
 4. sub_categories.sql
+5. users.sql
 
