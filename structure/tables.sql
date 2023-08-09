@@ -12,7 +12,7 @@ create table `accounts` (
 -- Create table `users`
 create table `users` (
     `id` bigint unsigned not null auto_increment primary key,
-    `account_id` bigint not null,
+    `account_id` bigint unsigned not null,
     `nickname` varchar(255) not null,
     `email` varchar(255),
     `phone_number` varchar(255),
