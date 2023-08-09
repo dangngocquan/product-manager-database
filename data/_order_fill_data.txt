@@ -1,3 +1,4 @@
 1. cities.sql
 2. districts.sql
 3. wards.sql
+4. categories.sql
