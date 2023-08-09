@@ -88,7 +88,7 @@ create table `history_searchs` (
 -- Create table `shops`
 create table `shops` (
     `id` bigint unsigned not null auto_increment primary key,
-    `ower_id` bigint unsigned not null,
+    `owner_id` bigint unsigned not null,
     `username` varchar(255) not null,
     `brand_name` varchar(255) not null,
     `time_created` datetime not null default current_timestamp,
