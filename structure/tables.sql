@@ -6,6 +6,7 @@ create table `accounts` (
     `username` varchar(255) not null,
     `password` varchar(255) not null,
     `status` enum("normal", "banned", "deleted") not null default "normal",
+    `type` enum("user", "admin") not null default "user",
     `time_registered` datetime not null default current_timestamp
 );
 
@@ -165,7 +166,7 @@ create table `categories` (
     `id` bigint unsigned not null auto_increment primary key,
     `name` varchar(255) not null,
     `image` text,
-    `level` int(11) not null,
+    `level` int not null,
     `time_added` timestamp not null default current_timestamp,
     `status` enum("normal", "hidden", "deleted") not null default "normal"
 );
