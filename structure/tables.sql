@@ -197,7 +197,8 @@ create table `product_variations` (
     `id` bigint unsigned not null auto_increment primary key,
     `product_id` bigint unsigned not null,
     `attributes` json not null,
-    `price` bigint unsigned not null
+    `price` bigint unsigned not null,
+    `status` enum("normal", "deleted") not null default "normal"
 );
 
 -- Create table `orders`
