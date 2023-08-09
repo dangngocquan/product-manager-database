@@ -27,7 +27,7 @@ console.log(citiesName);
 console.log(oldCitiesId);
 
 
-// Results of above code, and I copy it to here for use laster
+// Results of above code, and I copy it to here for use later
 newCitiesId = [
     1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12,
    13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
@@ -90,12 +90,3 @@ citiesName.forEach(function(cityName) {
 })
 sql = sql.substring(0, sql.length-2) + ";";
 // console.log(sql);
-
-
-
-// Export data to use later
-module.exports = {
-    newCitiesId: newCitiesId,
-    citiesName: citiesName,
-    oldCitiesId: oldCitiesId
-}
