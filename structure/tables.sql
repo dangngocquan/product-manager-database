@@ -107,7 +107,7 @@ create table `carts` (
 create table `followers_of_users` (
     `id` bigint unsigned not null auto_increment primary key,
     `user_id` bigint unsigned not null,
-    `follwer_id` bigint unsigned not null,
+    `follower_id` bigint unsigned not null,
     `time_followed` datetime not null default current_timestamp
 );
 
@@ -115,7 +115,7 @@ create table `followers_of_users` (
 create table `followers_of_shops` (
     `id` bigint unsigned not null auto_increment primary key,
     `shop_id` bigint unsigned not null,
-    `follwer_id` bigint unsigned not null,
+    `follower_id` bigint unsigned not null,
     `time_followed` datetime not null default current_timestamp
 );
 
@@ -125,7 +125,7 @@ create table `shop_notifications` (
     `shop_id` bigint unsigned not null,
     `title` varchar(255) not null,
     `description` varchar(255),
-    `details_infp` json not null,
+    `details_info` json not null,
     `time_created` datetime not null default current_timestamp,
     `is_seen` enum("0", "1") not null default "0"
 );
