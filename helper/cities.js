@@ -6,8 +6,8 @@ var citiesName = [];
 var cities = {};
 var city = {};
 
-const api = "https://shopee.vn/api/v4/location/get_child_division_list"; 
-fetch(api)
+var api = "https://shopee.vn/api/v4/location/get_child_division_list"; 
+await fetch(api)
     .then(function (response) {
         return response.json();
     })
@@ -19,14 +19,12 @@ fetch(api)
             oldCitiesId.push(city.id);
             newCitiesId.push(i);
             citiesName.push(city.division_name);
-            if (i == cities.length) {
-                console.log(newCitiesId);
-                console.log(citiesName);
-                console.log(oldCitiesId);
-            }
+                
         };
     });
-
+console.log(newCitiesId);
+console.log(citiesName);
+console.log(oldCitiesId);
 
 
 // Results of above code, and I copy it to here for use laster
