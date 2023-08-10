@@ -6,4 +6,5 @@ Product manager database uses mySQL language to create tables and fill data.
 
 
 
-![product_manager drawio](https://github.com/dangngocquan/product-manager-database/assets/95365566/b50ca7e3-2377-403d-8fa2-f3a33ccf244e)
+
+![product_manager drawio](https://github.com/dangngocquan/product-manager-database/assets/95365566/4d308f55-f0fe-47dc-a6ae-c5484aea50d6)
