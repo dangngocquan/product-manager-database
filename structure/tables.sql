@@ -10,8 +10,8 @@ create table `accounts` (
     `time_registered` datetime not null default current_timestamp
 );
 
--- Create table `users`
-create table `users` (
+-- Create table `clients`
+create table `clients` (
     `id` bigint unsigned not null auto_increment primary key,
     `account_id` bigint unsigned not null,
     `nickname` varchar(255) not null,
@@ -19,8 +19,7 @@ create table `users` (
     `phone_number` varchar(255),
     `gender` enum("male", "female", "other"),
     `birthday` datetime not null default current_timestamp,
-    `portrait` text,
-    `status` enum("normal", "banned", "deleted") not null default "normal"
+    `portrait` text
 );
 
 -- Create table `cities`
@@ -51,9 +50,9 @@ create table `addresses` (
     `id` bigint unsigned not null auto_increment primary key,
     `user_id` bigint unsigned not null,
     `phone_number` varchar(255) not null,
-    `city_id` bigint unsigned not null,
-    `district_id` bigint unsigned not null,
     `ward_id` bigint unsigned not null,
+    `district_id` bigint unsigned not null,
+    `city_id` bigint unsigned not null,
     `address` text,
     `is_deliver_address` enum("0", "1") not null,
     `time_created` datetime not null default current_timestamp,
@@ -148,8 +147,8 @@ create table `products` (
 -- Create table `favourite_products`
 create table `favourite_products` (
     `id` bigint unsigned not null auto_increment primary key,
-    `user_id` bigint unsigned not null,
     `product_id` bigint unsigned not null,
+    `user_id` bigint unsigned not null,
     `time_liked` timestamp not null default current_timestamp
 );
 
@@ -167,15 +166,9 @@ create table `categories` (
     `name` varchar(255) not null,
     `image` text,
     `level` int not null,
+    `parent_category_id` bigint unsigned not null,
     `time_added` timestamp not null default current_timestamp,
     `status` enum("normal", "hidden", "deleted") not null default "normal"
-);
-
--- Create table `category_relations`
-create table `category_relations` (
-    `id` bigint unsigned not null auto_increment primary key,
-    `parent_category_id` bigint unsigned not null,
-    `child_category_id` bigint unsigned not null
 );
 
 -- Create table `products_of_categories`
@@ -205,8 +198,8 @@ create table `product_variations` (
 -- Create table `orders`
 create table `orders` (
     `id` bigint unsigned not null auto_increment primary key,
-    `receiver_id` bigint unsigned not null,
     `product_variation_id` bigint unsigned not null,
+    `receiver_id` bigint unsigned not null,
     `delivery_center_id` bigint unsigned not null,
     `process_id` bigint unsigned not null,
     `payment_info_id` bigint unsigned not null,
