@@ -1,0 +1,74 @@
+{
+    "categories": [
+        {
+            "name": "Computers & Tablets",
+            "children": [
+                {
+                    "name": "Apple",
+                    "children": [
+                        {
+                            "name": "Mac",
+                            "children": []
+                        },
+                        {
+                            "name": "iPad",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "name": "Dell",
+                    "children": [
+                        {
+                            "name": "Notebooks",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "name": "Microsoft",
+                    "children": [
+                        {
+                            "name": "Surface Laptop",
+                            "children": []
+                        }
+                    ]
+                },
+                {
+                    "name": "Lenovo",
+                    "children": [
+                        {
+                            "name": "Desktops",
+                            "children": []
+                        },
+                        {
+                            "name": "Notebooks",
+                            "children": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Headphones & Audio",
+            "children": [
+                {
+                    "name": "Earbuds",
+                    "children": []
+                },
+                {
+                    "name": "Speakers",
+                    "children": []
+                },
+                {
+                    "name": "Beats",
+                    "children": []
+                },
+                {
+                    "name": "Microphones",
+                    "children": []
+                }
+            ]
+        }
+    ]
+}
