@@ -250,3 +250,9 @@ create table "order_processes" (
     "time_completed" timestamp,
     "time_cancelled" timestamp
 );
+
+-- Create table "sliders"
+create table "sliders" (
+    "id" bigserial not null primary key,
+    "image" text not null
+);
