@@ -29,9 +29,9 @@ create table "clients" (
     "nickname" varchar(255) not null,
     "email" varchar(255),
     "phone_number" varchar(255),
-    "gender" enum_gender_1,
+    "gender" enum_gender_1 default 'other',
     "birthday" timestamp not null default current_timestamp,
-    "portrait" text
+    "portrait" text default 'default-portrait.jpg'
 );
 
 -- Create table "cities"
