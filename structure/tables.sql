@@ -149,11 +149,12 @@ create table "products" (
     "name" varchar(255) not null,
     "image" text,
     "price" bigint not null,
-    "currency" varchar(255) not null default 'VND',
+    "currency" varchar(255) not null default '$',
     "stock" bigint not null,
     "time_added" timestamp not null default current_timestamp,
     "description" text,
-    "status" enum_status_2 not null default 'normal'
+    "status" enum_status_2 not null default 'normal',
+    "sold": bigint not null default 104
 );
 
 -- Create table "favourite_products"
