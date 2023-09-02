@@ -154,7 +154,7 @@ create table "products" (
     "time_added" timestamp not null default current_timestamp,
     "description" text,
     "status" enum_status_2 not null default 'normal',
-    "sold": bigint not null default 104
+    "sold": bigint not null default 0
 );
 
 -- Create table "favourite_products"
