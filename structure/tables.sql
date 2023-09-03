@@ -208,6 +208,34 @@ create table "product_variations" (
     "status" enum_status_2 not null default 'normal'
 );
 
+-- Create table "product_variants"
+create table "product_variants" (
+    "id" bigserial not null primary key,
+    "product_id" bigint not null,
+    "price" bigint not null,
+    "status" enum_status_2 not null default 'normal'
+);
+
+-- Create table "variants"
+create table "variants" (
+    "id" bigserial not null primary key,
+    "variant_name" varchar(255) not null
+);
+
+-- Create table "variant_values"
+create table "variant_values" (
+    "id" bigserial not null primary key,
+    "variant_id" bigint not null,
+    "value" varchar(255) not null
+);
+
+-- Create table "product_variant_details"
+create table "product_variant_details" (
+    "id" bigserial not null primary key,
+    "product_variant_id" bigint not null,
+    "variant_value_id" bigint not null
+);
+
 -- Create table "orders"
 create table "orders" (
     "id" bigserial not null primary key,

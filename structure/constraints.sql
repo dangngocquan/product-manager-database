@@ -44,6 +44,12 @@ alter table "products_of_carts" add constraint "fk_productsOfCarts_carts" foreig
 -- Add constraint for table "products"
 alter table "products" add constraint "fk_products_shops" foreign key ("shop_id") references "shops"("id");
 
+-- Add constraint for table "product_variants"
+alter table "product_variants" add constraint "fk_producVariants_products" foreign key ("product_id") references "products"("id");
+
+-- Add constraint for table "product_images"
+alter table "product_images" add constraint "fk_producImages_products" foreign key ("product_id") references "products"("id");
+
 -- Add constraint for table "shop_notifications"
 alter table "shop_notifications" add constraint "fk_shopNotifications_shops" foreign key ("shop_id") references "shops"("id");
 
@@ -53,7 +59,7 @@ alter table "followers_of_shops" add constraint "fk_folowersOfShops_clients" for
 
 -- Add constraint for table "orders"
 alter table "orders" add constraint "fk_orders_addresses" foreign key ("receiver_id") references "addresses"("id");
-alter table "orders" add constraint "fk_orders_productVariations" foreign key ("product_variation_id") references "product_variations" ("id");
+alter table "orders" add constraint "fk_orders_productVariants" foreign key ("product_variation_id") references "product_variants" ("id");
 alter table "orders" add constraint "fk_orders_deliveryCenters" foreign key ("delivery_center_id") references "delivery_centers" ("id");
 alter table "orders" add constraint "fk_orders_orderProcesses" foreign key ("process_id") references "order_processes"("id");
 alter table "orders" add constraint "fk_orders_orderPaymentsInfo" foreign key ("payment_info_id") references "order_payments_info" ("id");
