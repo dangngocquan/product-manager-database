@@ -49,6 +49,10 @@ alter table "product_variants" add constraint "fk_producVariants_products" forei
 
 -- Add constraint for table "variant_values"
 alter table "variant_values" add constraint "fk_variantValues_variants" foreign key ("variant_id") references "variants"("id");
+alter table "variant_values" add constraint "variants_variant_id_value_unique" unique("variant_id", "value")
+
+-- Add constraint for table "variants"
+alter table "variants" add constraint "variants_variant_name_unique" unique("variant_name")
 
 -- Add constraint for table "product_variant_details"
 alter table "product_variant_details" add constraint "fk_productVariantDetails_productVariants" foreign key ("product_variant_id") references "product_variants"("id");
