@@ -47,6 +47,12 @@ alter table "products" add constraint "fk_products_shops" foreign key ("shop_id"
 -- Add constraint for table "product_variants"
 alter table "product_variants" add constraint "fk_producVariants_products" foreign key ("product_id") references "products"("id");
 
+-- Add constraint for table "variant_values"
+alter table "variant_values" add constraint "fk_variantValues_variants" foreign key ("variant_id") references "variants"("id");
+
+-- Add constraint for table "product_variant_details"
+alter table "product_variant_details" add constraint "fk_productVariantDetails_productVariants" foreign key ("product_variant_id") references "product_variants"("id");
+
 -- Add constraint for table "product_images"
 alter table "product_images" add constraint "fk_producImages_products" foreign key ("product_id") references "products"("id");
 
