@@ -112,8 +112,7 @@ create table "shops" (
 create table "carts" (
     "id" bigserial not null primary key,
     "owner_id" bigint not null,
-    "time_created" timestamp not null default current_timestamp,
-    "name" varchar(255) not null
+    "time_created" timestamp not null default current_timestamp
 );
 
 -- Create table "followers_of_users"
