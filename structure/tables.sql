@@ -171,7 +171,8 @@ create table "products_of_carts" (
     "id" bigserial not null primary key,
     "product_id" bigint not null,
     "cart_id" bigint not null,
-    "time_added" timestamp not null default current_timestamp
+    "time_added" timestamp not null default current_timestamp,
+    "product_variant_id" bigint
 );
 
 -- Create table "categories"
