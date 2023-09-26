@@ -19,7 +19,8 @@ create table "accounts" (
     "password" varchar(255) not null,
     "status" enum_status_1 not null default 'normal',
     "type" enum_types_1 not null default 'user',
-    "time_registered" timestamp not null default current_timestamp
+    "time_registered" timestamp not null default current_timestamp,
+    "email" varchar(255)
 );
 
 -- Create table "clients"
@@ -27,7 +28,6 @@ create table "clients" (
     "id" bigserial not null primary key,
     "account_id" bigint not null,
     "nickname" varchar(255) not null,
-    "email" varchar(255),
     "phone_number" varchar(255),
     "gender" enum_gender_1 default 'other',
     "birthday" timestamp not null default current_timestamp,
