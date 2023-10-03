@@ -286,3 +286,10 @@ create table "sliders" (
     "id" bigserial not null primary key,
     "image" text not null
 );
+
+-- Create table "verify_emails"
+create table "verify_email" (
+	"id" bigserial not null primary key,
+	"email" varchar(255) not null,
+	"time" timestamp not null default current_timestamp
+)
